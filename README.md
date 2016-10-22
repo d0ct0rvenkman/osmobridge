@@ -3,7 +3,7 @@
 ## Purpose
 Since the DJI Osmo uses a mobile device's WiFi for control, the mobile's WiFi is unusable for accessing the internet. This is annoying. Osmobridge fixes this by using a Raspberry Pi 3 as a bridge between your mobile device and your Osmo, routing traffic desined for the Osmo to its WiFi network, and sending other traffic out through the RPi's default gateway (either eth0 or some other network interface such as a USB MiFi dongle).
 
-## Insallation
+## Installation
 Copy osmobridge.inc and osmobridge.sh to /root on a freshly installed Raspbian install. Edit osmobridge.inc with your Osmo's WiFi settings, and add the WiFi settings that you want the bridge to use. They should be different than the Osmo's settings so you can ensure your mobile is connecting to the correct device. After the settings are in place, run the following to initialize things. It will blow away any network configs you might have and configure some default settings, so be warned.
 ```
 sudo -i
