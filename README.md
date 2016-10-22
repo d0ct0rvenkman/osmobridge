@@ -11,3 +11,9 @@ Copy osmobridge.inc and osmobridge.sh to /root on a freshly installed Raspbian i
 > ./osmobridge.sh init
 
 This will update the raspbian install, make sure dependencies are installed, and then populate the necessary configuration files. If all works as expected, all you should need to do is reboot the RPi and the bridge should initialize when it comes up!
+
+## To Do
+* Make sure it actually works! (I'm still testing it. Damn you slow SD cards!)
+* Make the firewall provide security instead of just routing traffic.
+..* Alternate ssh ports?
+* Maybe have the script ask questions when initializing itself instead of having the user edit the config file
