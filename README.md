@@ -12,10 +12,11 @@ chmod +x osmobridge.sh
 ./osmobridge.sh init
 ```
 
+This will update the raspbian install, make sure dependencies are installed, and then populate the necessary configuration files. If all works as expected, all you should need to do is reboot the RPi and the bridge should initialize when it comes up!
+
 ## Gotchas
 * If you happen to have multiple mobile devices trying to use the bridge to talk to the Osmo, the message in the DJI GO app that would normally be displayed on the second device stating that the Osmo is already in use may not be displayed. Instead, the Go app will appear to disconnect and reconnect ad infinitum. Make sure only one device is trying to connect!
 
-This will update the raspbian install, make sure dependencies are installed, and then populate the necessary configuration files. If all works as expected, all you should need to do is reboot the RPi and the bridge should initialize when it comes up!
 
 ## To Do
 * Make sure it actually works! (I'm still testing it. Damn you slow SD cards!)
