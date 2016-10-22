@@ -127,10 +127,13 @@ else
 	iptables -F INPUT
 	iptables -F OUTPUT
 	iptables -F FORWARD
+	iptables -F POSTROUTING -t nat
 
 	iptables -I FORWARD 1 -i wlan0_ap -s 192.168.2.1/24 -j ACCEPT
-	iptables -t nat -I POSTROUTING 1 -o eth0 -s 192.168.1.0/24 -j MASQUERADE
-	iptables -t nat -I POSTROUTING 1 -o wlan0 -s 192.168.2.1/24 -d 192.168.1.0/24 -j MASQUERADE
+	iptables -t nat -A POSTROUTING -o wlan0 -s 192.168.2.1/24 -d 192.168.1.0/24 -j MASQUERADE
+	iptables -t nat -A POSTROUTING -o eth0 -s 192.168.2.0/24 -j MASQUERADE
+	iptables -t nat -A POSTROUTING -o eth1 -s 192.168.2.0/24 -j MASQUERADE
+
 
 	# in my testing, using the init script doesn't actually start hostapd. not really sure why.
 	hostapd /etc/hostapd/hostapd.conf -B
