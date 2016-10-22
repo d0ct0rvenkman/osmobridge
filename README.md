@@ -28,3 +28,4 @@ chmod +x osmobridge.sh
 * Make the firewall provide security instead of just routing traffic.
   * Alternate ssh ports?
 * Maybe have the script ask questions when initializing itself instead of having the user edit the config file
+* Instead of a monolithic script running from rc.local, see about having everything run out of normal Raspbian OS locations
