@@ -23,6 +23,7 @@ chmod +x osmobridge.sh
 
 
 ## To Do
+* Make it work reliably. It works, but is currently finnicky.
 * Figure out why hostapd doesn't start using its init script
 * Figure out how to make osmobridge.sh run after the whole OS boots up instead of doing it badly with a sleep command.
 * Make the firewall provide security instead of just routing traffic.
