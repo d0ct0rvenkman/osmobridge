@@ -15,5 +15,5 @@ This will update the raspbian install, make sure dependencies are installed, and
 ## To Do
 * Make sure it actually works! (I'm still testing it. Damn you slow SD cards!)
 * Make the firewall provide security instead of just routing traffic.
-..* Alternate ssh ports?
+  * Alternate ssh ports?
 * Maybe have the script ask questions when initializing itself instead of having the user edit the config file
