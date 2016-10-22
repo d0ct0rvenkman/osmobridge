@@ -9,7 +9,7 @@ The install process overwrites things indiscrimnately, so if you care about your
 * Copy `osmobridge.inc` and `osmobridge.sh` to `/root`.
 * Edit `osmobridge.inc` with your Osmo's WiFi settings, and add the WiFi settings that you want the bridge to use. They should be different than the Osmo's settings so you can ensure your mobile is connecting to the correct device.
 * Run the following to initialize things. This will update the raspbian install, make sure dependencies are installed, and then populate the necessary configuration files.
-```
+```bash
 sudo -i
 cd /root
 chmod +x osmobridge.sh
