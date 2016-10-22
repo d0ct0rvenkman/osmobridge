@@ -36,7 +36,7 @@ EOF
 
 	# populate hostapd.conf
 	cat <<EOF > /etc/hostapd/hostapd.conf
-nterface=wlan0_ap
+interface=wlan0_ap
 driver=nl80211
 ssid=${BRIDGESSID}
 hw_mode=g
