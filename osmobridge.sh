@@ -132,6 +132,7 @@ else
 	iptables -t nat -I POSTROUTING 1 -o eth0 -s 192.168.1.0/24 -j MASQUERADE
 	iptables -t nat -I POSTROUTING 1 -o wlan0 -s 192.168.2.1/24 -d 192.168.1.0/24 -j MASQUERADE
 
+	# in my testing, using the init script doesn't actually start hostapd. not really sure why.
 	hostapd /etc/hostapd/hostapd.conf -B
 	service dnsmasq restart
 
