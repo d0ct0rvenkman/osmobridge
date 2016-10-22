@@ -5,10 +5,12 @@ Since the DJI Osmo uses a mobile device's WiFi for control, the mobile's WiFi is
 
 ## Insallation
 Copy osmobridge.inc and osmobridge.sh to /root on a freshly installed Raspbian install. Edit osmobridge.inc with your Osmo's WiFi settings, and add the WiFi settings that you want the bridge to use. They should be different than the Osmo's settings so you can ensure your mobile is connecting to the correct device. After the settings are in place, run the following to initialize things. It will blow away any network configs you might have and configure some default settings, so be warned.
-> sudo -i
-> cd /root
-> chmod +x osmobridge.sh
-> ./osmobridge.sh init
+```
+sudo -i
+cd /root
+chmod +x osmobridge.sh
+./osmobridge.sh init
+```
 
 This will update the raspbian install, make sure dependencies are installed, and then populate the necessary configuration files. If all works as expected, all you should need to do is reboot the RPi and the bridge should initialize when it comes up!
 
