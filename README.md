@@ -25,6 +25,7 @@ chmod +x osmobridge.sh
 ## To Do
 * Make sure it actually works! (I'm still testing it. Damn you slow SD cards!)
 * Figure out why hostapd doesn't start using its init script
+* Figure out how to make osmobridge.sh run after the whole OS boots up instead of doing it badly with a sleep command.
 * Make the firewall provide security instead of just routing traffic.
   * Alternate ssh ports?
 * Maybe have the script ask questions when initializing itself instead of having the user edit the config file
