@@ -84,7 +84,7 @@ EOF
 	# the osmo.
 	cat <<EOF >  /etc/network/interfaces.d/wlan0
 allow_hotplug wlan0
-iface wlan0_ap inet static
+iface wlan0 inet static
     address 192.168.1.25
     network 255.255.255.0
 	wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
