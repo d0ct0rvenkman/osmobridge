@@ -101,11 +101,15 @@ EOF
 	chmod +x /etc/rc.local
 
 
-	# enable/disable services
+	# enable/disable applicable services
 	systemctl disable dnsmasq
 	systemctl disable hostapd
 	systemctl disable dhcpcd
 	systemctl enable wpa_supplicant
+
+	# disable unnecessary crap
+	systemctl disable avahi-daemon
+	systemctl disable bluetooth
 else
 	# make it go!
 	iw wlan0 interface add wlan0_ap type __ap
