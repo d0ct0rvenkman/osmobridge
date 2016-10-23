@@ -112,7 +112,7 @@ exit 0
 EOF
 
 	# add directives to dhcpcd.conf
-	cat <<EOF >cat <<EOF >> /etc/dhcpcd.conf
+	cat <<EOF >> /etc/dhcpcd.conf
 denyinterfaces wlan0_ap
 delay 20
 timeout 10
