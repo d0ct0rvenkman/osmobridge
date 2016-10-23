@@ -96,8 +96,13 @@ iface wlan0_ap inet static
     network 255.255.255.0
 EOF
 	# run out of rc.local
+	cat <<EOF >  /etc/rc.local
+#!/bin/sh -e
+/root/osmobridge.sh
+exit 0
+EOF
+
 	chmod +x /root/osmobridge.sh
-	echo "/root/osmobridge.sh" >> /etc/rc.local
 	chmod +x /etc/rc.local
 
 
