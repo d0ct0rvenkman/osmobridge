@@ -114,7 +114,6 @@ EOF
 	# add directives to dhcpcd.conf
 	cat <<EOF >> /etc/dhcpcd.conf
 denyinterfaces wlan0_ap
-timeout 30
 EOF
 
 	chmod +x /root/osmobridge.sh
