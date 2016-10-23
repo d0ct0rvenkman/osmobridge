@@ -53,6 +53,7 @@ wpa_passphrase=${BRIDGEPASS}
 rsn_pairwise=CCMP
 EOF
 
+	# Apparently there is no default config file
 	echo "DAEMON_CONF=/etc/hostapd/hostapd.conf" >> /etc/default/hostapd
 
 	# populate dnsmasq.conf
