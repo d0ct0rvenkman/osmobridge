@@ -77,13 +77,13 @@ EOF
 	# populate /etc/network/interfaces.d/eth0
 	cat <<EOF >  /etc/network/interfaces.d/eth0
 allow-hotplug eth0
-iface eth0 inet dhcp
+iface eth0 inet manual
 EOF
 
 # populate /etc/network/interfaces.d/eth1 (for things like USB MiFi)
 cat <<EOF >  /etc/network/interfaces.d/eth1
 allow-hotplug eth1
-iface eth1 inet dhcp
+iface eth1 inet manual
 EOF
 
 
@@ -93,7 +93,7 @@ EOF
 	# the osmo.
 	cat <<EOF >  /etc/network/interfaces.d/wlan0
 allow-hotplug wlan0
-iface wlan0 inet dhcp
+iface wlan0 inet manual
 	wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 EOF
@@ -111,6 +111,13 @@ EOF
 exit 0
 EOF
 
+	# add directives to dhcpcd.conf
+	cat <<EOF >cat <<EOF >> /etc/dhcpcd.conf
+denyinterfaces wlan0_ap
+delay 20
+timeout 10
+EOF
+
 	chmod +x /root/osmobridge.sh
 	chmod +x /etc/rc.local
 
@@ -118,7 +125,7 @@ EOF
 	# enable/disable applicable services
 	systemctl disable dnsmasq
 	systemctl disable hostapd
-	systemctl disable dhcpcd
+	systemctl enable dhcpcd
 	systemctl enable wpa_supplicant
 
 	# disable unnecessary crap
