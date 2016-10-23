@@ -28,7 +28,7 @@ Edit settings in `osmobridge.sh`
 ## Gotchas
 * If you happen to have multiple mobile devices trying to use the bridge to talk to the Osmo, the message in the DJI GO app that would normally be displayed on the second device stating that the Osmo is already in use may not be displayed. Instead, the Go app will appear to disconnect and reconnect ad infinitum. Make sure only one device is trying to connect!
 * The Pi seems to have very little RNG entropy populated on boot, so it seems to take multiple attempts to connect to the bridge because hostapd needs to wait before it can generate keys.
-* The Pi's dhcp clients seem slow to see that a new connection has been made (ethernet, Mifi, or the osmo). It seems best at this point to start the Pi with your internet connection plugged in, and the Osmo on.
+* The Pi's dhcp clients seem slow to see that a new connection has been made (ethernet, Mifi, or the Osmo). It seems best at this point to start the Pi with your internet connection plugged in, and the Osmo on.
 
 ## To Do
 * Figure out how to make osmobridge.sh run after the whole OS boots up instead of doing it badly with a sleep command.
