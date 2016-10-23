@@ -73,8 +73,6 @@ EOF
 
 	# populate /etc/network/interfaces.d/eth0
 	cat <<EOF >  /etc/network/interfaces.d/eth0
-auto eth0
-allow_hotplug eth0
 iface eth0 inet dhcp
 EOF
 
@@ -83,17 +81,13 @@ EOF
 	# give out via DHCP. IPs lower than .20 get denied streaming/control by
 	# the osmo.
 	cat <<EOF >  /etc/network/interfaces.d/wlan0
-allow_hotplug wlan0
-iface wlan0 inet static
-    address 192.168.1.25
-    network 255.255.255.0
+iface wlan0 inet dhcp
 	wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 EOF
 
 	# populate /etc/network/interfaces.d/wlan0_ap
 	cat <<EOF >  /etc/network/interfaces.d/wlan0_ap
-allow_hotplug wlan0_ap
 iface wlan0_ap inet static
     address 192.168.2.1
     network 255.255.255.0
@@ -108,14 +102,12 @@ EOF
 	# enable/disable services
 	systemctl disable dnsmasq
 	systemctl disable hostapd
+	systemctl disable dhcpcd
 	systemctl enable wpa_supplicant
 else
 	# make it go!
 	iw wlan0 interface add wlan0_ap type __ap
-
 	ifup wlan0_ap
-	ifup wlan0
-	ifup eth0
 
 	echo 1 > /proc/sys/net/ipv4/ip_forward
 
@@ -138,5 +130,9 @@ else
 	# in my testing, using the init script doesn't actually start hostapd. not really sure why.
 	hostapd /etc/hostapd/hostapd.conf -B
 	service dnsmasq restart
+
+	#  start the DHCP interfaces later after all the other stuff is running
+	ifup wlan0 &
+	ifup eth0 &
 
 fi
