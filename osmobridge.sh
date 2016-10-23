@@ -94,10 +94,6 @@ iface wlan0_ap inet static
     address 192.168.2.1
     network 255.255.255.0
 EOF
-
-	echo "timeout 15" >> /etc/dhcpcd.conf
-	echo "retry 30" >> /etc/dhcpcd.conf
-
 	# run out of rc.local
 	chmod +x /root/osmobridge.sh
 	echo "/root/osmobridge.sh" >> /etc/rc.local
