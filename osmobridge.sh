@@ -76,14 +76,23 @@ EOF
 
 	# populate /etc/network/interfaces.d/eth0
 	cat <<EOF >  /etc/network/interfaces.d/eth0
+allow-hotplug eth0
 iface eth0 inet dhcp
 EOF
+
+# populate /etc/network/interfaces.d/eth1 (for things like USB MiFi)
+cat <<EOF >  /etc/network/interfaces.d/eth1
+allow-hotplug eth1
+iface eth1 inet dhcp
+EOF
+
 
 	# populate /etc/network/interfaces.d/wlan0
 	# we use 192.168.1.25 because it seems to be in the range the Osmo will
 	# give out via DHCP. IPs lower than .20 get denied streaming/control by
 	# the osmo.
 	cat <<EOF >  /etc/network/interfaces.d/wlan0
+allow-hotplug wlan0
 iface wlan0 inet dhcp
 	wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
