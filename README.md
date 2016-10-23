@@ -31,7 +31,6 @@ Edit settings in `osmobridge.sh`
 * The Pi's dhcp clients seem slow to see that a new connection has been made (ethernet, Mifi, or the osmo). It seems best at this point to start the Pi with your internet connection plugged in, and the Osmo on.
 
 ## To Do
-* Make it work reliably. It works, but is currently finnicky.
 * Figure out how to make osmobridge.sh run after the whole OS boots up instead of doing it badly with a sleep command.
 * Make the firewall provide security instead of just routing traffic.
   * Alternate ssh ports?
