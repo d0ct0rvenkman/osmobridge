@@ -132,7 +132,7 @@ else
 	service dnsmasq restart
 
 	#  start the DHCP interfaces later after all the other stuff is running
-	ifup wlan0 &
-	ifup eth0 &
+	ifup wlan0 > /dev/null 2>&1 &
+	ifup eth0  > /dev/null 2>&1 &
 
 fi
