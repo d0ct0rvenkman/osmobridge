@@ -24,9 +24,9 @@ chmod +x osmobridge.sh
 
 ## To Do
 * Make it work reliably. It works, but is currently finnicky.
-* Figure out why hostapd doesn't start using its init script
 * Figure out how to make osmobridge.sh run after the whole OS boots up instead of doing it badly with a sleep command.
 * Make the firewall provide security instead of just routing traffic.
   * Alternate ssh ports?
 * Maybe have the script ask questions when initializing itself instead of having the user edit the config file
 * Instead of a monolithic script running from rc.local, see about having everything run out of normal Raspbian OS locations
+* Run with read-only partitions so sudden powercycles are safe
