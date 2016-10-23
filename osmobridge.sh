@@ -53,6 +53,8 @@ wpa_passphrase=${BRIDGEPASS}
 rsn_pairwise=CCMP
 EOF
 
+	echo "DAEMON_CONF=/etc/hostapd/hostapd.conf" >> /etc/default/hostapd
+
 	# populate dnsmasq.conf
 	cat <<EOF > /etc/dnsmasq.conf
 interface=wlan0_ap
@@ -93,6 +95,9 @@ iface wlan0_ap inet static
     network 255.255.255.0
 EOF
 
+	echo "timeout 15" >> /etc/dhcpcd.conf
+	echo "retry 30" >> /etc/dhcpcd.conf
+
 	# run out of rc.local
 	chmod +x /root/osmobridge.sh
 	echo "/root/osmobridge.sh" >> /etc/rc.local
@@ -127,9 +132,8 @@ else
 	iptables -t nat -A POSTROUTING -o eth1 -s 192.168.2.0/24 -j MASQUERADE
 
 
-	# in my testing, using the init script doesn't actually start hostapd. not really sure why.
-	hostapd /etc/hostapd/hostapd.conf -B
-	service dnsmasq restart
+	service hostapd start
+	service dnsmasq start
 
 	#  start the DHCP interfaces later after all the other stuff is running
 	ifup wlan0 > /dev/null 2>&1 &
