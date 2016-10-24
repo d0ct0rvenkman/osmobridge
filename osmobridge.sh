@@ -150,8 +150,10 @@ else
 	# populate rules
 	iptables -A INPUT -i lo -j ACCEPT
 	iptables -A INPUT -i wlan0_ap -j ACCEPT
+	iptables -A INPUT -p icmp -j ACCEPT
 	iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 	iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+	iptables -A FORWARD -p icmp -j ACCEPT
 	iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 	iptables -A FORWARD -i wlan0_ap -s 192.168.2.1/24 -j ACCEPT
 	iptables -t nat -A POSTROUTING -o wlan0 -s 192.168.2.1/24 -d 192.168.1.0/24 -j MASQUERADE
