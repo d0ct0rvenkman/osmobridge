@@ -4,19 +4,41 @@
 if [ -r /root/osmobridge.inc ];
 then
 	. /root/osmobridge.inc
-else
-	echo "Config file is not present. Exiting unhappily."
-	exit 1
-fi
-
-if [ "x$OSMOSSID" == "x" ];
-then
-	echo "Configuration seems to be missing. Exiting unhappily."
-	exit 2
 fi
 
 if [ "$1" == "init" ];
 then
+	# read in values that aren't present
+	if [ "x$OSMOSSID" == "x" ];
+	then
+		echo "Enter Osmo network name (SSID)"
+		read OSMOSSID
+	fi
+
+	if [ "x$OSMOPASS" == "x" ];
+	then
+		echo "Enter Osmo network password"
+		read OSMOPASS
+	fi
+
+	if [ "x$BRIDGESSID" == "x" ];
+	then
+		echo "Enter bridge network name (SSID)"
+		read BRIDGESSID
+	fi
+
+	if [ "x$BRIDGEPASS" == "x" ];
+	then
+		echo "Enter bridge network password"
+		read BRIDGEPASS
+	fi
+
+	cat <<EOF > /root/osmobridge.inc
+OSMOSSID="$OSMOSSID"
+OSMOPASS="$OSMOPASS"
+BRIDGESSID="$BRIDGESSID"
+BRIDGEPASS="$BRIDGEPASS"
+EOF
 	# get the OS up to date and necessities installed
 	apt-get update
 	apt-get -y upgrade
