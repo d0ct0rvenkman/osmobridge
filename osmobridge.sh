@@ -58,7 +58,7 @@ EOF
 
 	# populate hostapd.conf
 	cat <<EOF > /etc/hostapd/hostapd.conf
-interface=AP
+interface=wlan1
 driver=nl80211
 ssid=${BRIDGESSID}
 hw_mode=g
@@ -80,7 +80,7 @@ EOF
 
 	# populate dnsmasq.conf
 	cat <<EOF > /etc/dnsmasq.conf
-interface=AP
+interface=wlan1
 listen-address=192.168.2.1
 bind-interfaces
 server=8.8.8.8
@@ -120,9 +120,9 @@ iface wlan0 inet manual
 
 EOF
 
-	# populate /etc/network/interfaces.d/AP
-	cat <<EOF >  /etc/network/interfaces.d/AP
-iface AP inet static
+	# populate /etc/network/interfaces.d/wlan1
+	cat <<EOF >  /etc/network/interfaces.d/wlan1
+iface wlan1 inet static
     address 192.168.2.1
     network 255.255.255.0
 EOF
@@ -135,7 +135,7 @@ EOF
 
 	# add directives to dhcpcd.conf
 	cat <<EOF >> /etc/dhcpcd.conf
-denyinterfaces AP
+denyinterfaces wlan1
 EOF
 
 	chmod +x /root/osmobridge.sh
@@ -153,8 +153,7 @@ EOF
 	systemctl disable bluetooth
 else
 	# make it go!
-	iw wlan0 interface add AP type __ap
-	ifup AP
+	ifup wlan1
 
 	echo 1 > /proc/sys/net/ipv4/ip_forward
 
@@ -171,13 +170,13 @@ else
 
 	# populate rules
 	iptables -A INPUT -i lo -j ACCEPT
-	iptables -A INPUT -i AP -j ACCEPT
+	iptables -A INPUT -i wlan1 -j ACCEPT
 	iptables -A INPUT -p icmp -j ACCEPT
 	iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 	iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 	iptables -A FORWARD -p icmp -j ACCEPT
 	iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-	iptables -A FORWARD -i AP -s 192.168.2.1/24 -j ACCEPT
+	iptables -A FORWARD -i wlan1 -s 192.168.2.1/24 -j ACCEPT
 	iptables -t nat -A POSTROUTING -o wlan0 -s 192.168.2.1/24 -d 192.168.1.0/24 -j MASQUERADE
 	iptables -t nat -A POSTROUTING -o eth0 -s 192.168.2.0/24 -j MASQUERADE
 	iptables -t nat -A POSTROUTING -o eth1 -s 192.168.2.0/24 -j MASQUERADE
@@ -193,5 +192,8 @@ else
 	#  start the DHCP interfaces later after all the other stuff is running
 	ifup wlan0 > /dev/null 2>&1 &
 	ifup eth0  > /dev/null 2>&1 &
+
+	# start connection monitor notifier thing
+	wpa_cli -a /root/wpa_action.sh &
 
 fi
