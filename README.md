@@ -26,6 +26,7 @@ Edit settings in `osmobridge.sh`
 
 
 ## Gotchas
+* You'll need a second wifi interface to make this work. I really wanted this to work using a virtual wifi interface (it did initially) as an AP, but a Raspbian update seemed to break that. 
 * You'll need to make sure that your Osmo is configured to use a 2.4GHz band for its WiFi AP. The RPi3 doesn't seem to have a 5GHz radio.
 * If you happen to have multiple mobile devices trying to use the bridge to talk to the Osmo, the message in the DJI GO app that would normally be displayed on the second device stating that the Osmo is already in use may not be displayed. Instead, the Go app will appear to disconnect and reconnect ad infinitum. Make sure only one device is trying to connect!
 * The Pi seems to have very little RNG entropy populated on boot, so it seems to take multiple attempts to connect to the bridge because hostapd needs to wait before it can generate keys.
